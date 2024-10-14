@@ -63,7 +63,6 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <button onClick={handleVote}>Votar</button>
 
-      {/* Seção de comentários */}
       <CommentSection pollId={id} />
     </div>
   );
