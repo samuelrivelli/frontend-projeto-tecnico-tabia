@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../axios'; 
+import CommentSection from './CommentSection.tsx';
 
 interface Option {
   id: number;
@@ -61,8 +62,12 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <button onClick={handleVote}>Votar</button>
+
+      {/* Seção de comentários */}
+      <CommentSection pollId={id} />
     </div>
   );
 };
+
 
 export default Poll;

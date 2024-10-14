@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../axios'; 
+import axios from '../axios';
 
 interface Comment {
   id: number;
   content: string;
-  createdAt: string; 
+  userId: number; 
+  pollId: number;
+  createdAt: string;
 }
 
 interface CommentSectionProps {
-  pollId: number;
+  pollId: number; 
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
-  const [commentText, setCommentText] = useState('');
+  const [content, setContent] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get<Comment[]>(`api/v1/polls/${pollId}/comments`);
+        const response = await axios.get(`/api/v1/comments?pollId=${pollId}`); 
         setComments(response.data);
       } catch (error) {
         console.error('Erro ao buscar comentários:', error);
@@ -28,37 +32,47 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
     fetchComments();
   }, [pollId]);
 
-  const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
-      await axios.post(`api/v1/polls/${pollId}/comments`, { content: commentText });
-      setCommentText('');
-      const response = await axios.get<Comment[]>(`api/v1/polls/${pollId}/comments`);
-      setComments(response.data);
-    } catch (error) {
-      console.error('Erro ao adicionar comentário:', error);
+      const commentData = {
+        content,
+        userId: 12, 
+        pollId,
+      };
+
+      const response = await axios.post('/api/v1/comments', commentData);
+      setComments([...comments, response.data]);
+      setSuccess('Comentário enviado com sucesso!');
+    } catch (err) {
+      console.error('Erro ao enviar comentário:', err);
+      setError('Ocorreu um erro ao enviar seu comentário. Tente novamente.');
     }
   };
 
   return (
-    <div className="comment-section">
+    <div>
       <h3>Comentários</h3>
-      <form onSubmit={handleCommentSubmit}>
+      <form onSubmit={handleSubmit}>
         <textarea
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Escreva seu comentário..."
           required
         />
-        <button type="submit">Adicionar Comentário</button>
+        <button type="submit">Enviar Comentário</button>
       </form>
-      <ul>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
+      <div>
         {comments.map(comment => (
-          <li key={comment.id}>
-            <p>{comment.content}</p>
-            <small>{new Date(comment.createdAt).toLocaleString()}</small>
-          </li>
+          <div key={comment.id}>
+            <p><strong>Comentário:</strong> {comment.content}</p>
+            <p><small>{new Date(comment.createdAt).toLocaleString()}</small></p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
