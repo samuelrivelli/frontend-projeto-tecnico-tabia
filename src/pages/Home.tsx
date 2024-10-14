@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 interface Option {
   id: number;
   text: string;
+  voteCount: number;
 }
 
 interface PollDTO {
