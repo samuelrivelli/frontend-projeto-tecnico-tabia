@@ -1,4 +1,4 @@
-/* Estilos globais */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -6,7 +6,7 @@ body {
     padding: 0;
   }
   
-  /* Container principal */
+
   div {
     max-width: 800px;
     margin: 0 auto;
@@ -16,16 +16,21 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  /* Estilo do título */
+
   h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
   }
   
-  /* Botão de sair */
+
+  .button-container {
+    display: flex;
+    justify-content: space-between; 
+  }
+  
+
   button {
-    background-color: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -33,18 +38,31 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex: 1; 
+    margin: 0 10px;
+  }
+ 
+  .button-logout {
+    background-color: #ff4d4d; 
   }
   
-  button:hover {
+  .button-logout:hover {
     background-color: #ff1a1a;
   }
   
-  /* Link para o botão de logout */
+  .button-create {
+    background-color: #4CAF50; 
+  }
+  
+  .button-create:hover {
+    background-color: #45a049;
+  }
+  
   a {
     text-decoration: none;
   }
   
-  /* Estilos da lista de votações */
+
   .poll-item {
     margin-bottom: 20px;
     padding: 15px;
@@ -77,7 +95,6 @@ body {
     background-color: #d3d3d3;
   }
   
-  /* Responsividade */
   @media (max-width: 600px) {
     div {
       padding: 10px;
@@ -86,10 +103,20 @@ body {
     button {
       font-size: 14px;
       padding: 8px 10px;
+      margin: 0 5px;
     }
   
     .poll-item {
       padding: 10px;
+    }
+  
+   
+    .button-container {
+      flex-direction: column;
+    }
+  
+    .button-container button {
+      margin: 5px 0; 
     }
   }
   

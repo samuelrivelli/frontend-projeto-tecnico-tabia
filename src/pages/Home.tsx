@@ -46,15 +46,19 @@ const Home = () => {
   return (
     <div>
       <h1>Votações</h1>
-      <Link to="/logout"> 
-        <button>Sair</button>
-      </Link>
-      <Link to="/create-poll"> 
-        <button>Criar Nova Poll</button> 
-      </Link>
-      {polls.map(poll => (
-        <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
-      ))}
+      <div className="button-container">
+        <Link to="/logout">
+          <button className="button-logout">Sair</button>
+        </Link>
+        <Link to="/create-poll">
+          <button className="button-create">Criar Nova Poll</button>
+        </Link>
+      </div>
+      <div className="poll-container">
+        {polls.map(poll => (
+          <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
+        ))}
+      </div>
     </div>
   );
 };
