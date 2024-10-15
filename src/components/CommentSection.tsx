@@ -5,7 +5,7 @@ interface Comment {
   id: number;
   content: string;
   userId: number; 
-  username: string;  // Novo campo para armazenar o nome de usuário
+  username: string;  
   pollId: number;
   createdAt: string;
 }
@@ -23,8 +23,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`/api/v1/comments?pollId=${pollId}`); 
-        setComments(response.data);
+        const response = await axios.get('/api/v1/comments'); 
+        const filteredComments = response.data.filter((comment: Comment) => comment.pollId === pollId);
+        setComments(filteredComments);
       } catch (error) {
         console.error('Erro ao buscar comentários:', error);
       }
@@ -44,9 +45,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
       };
 
       const response = await axios.post('/api/v1/comments', commentData);
-      setComments([...comments, response.data]);
+      setComments((prevComments) => [...prevComments, response.data]); 
       setSuccess('Comentário enviado com sucesso!');
-      setContent('');  // Limpar o campo de texto após o envio
+      setContent('');  
     } catch (err) {
       console.error('Erro ao enviar comentário:', err);
       setError('Ocorreu um erro ao enviar seu comentário. Tente novamente.');
@@ -70,7 +71,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
       <div>
         {comments.map(comment => (
           <div key={comment.id}>
-            <p><strong>{comment.username}:</strong> {comment.content}</p>  {/* Exibe o username */}
+            <p><strong>{comment.username}:</strong> {comment.content}</p> 
             <p><small>{new Date(comment.createdAt).toLocaleString()}</small></p>
           </div>
         ))}
