@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from '../axios'; 
 import Poll from '../components/Poll.tsx'; 
 import { Link, useNavigate } from "react-router-dom"; 
+import "../css/Home.css";
 
 interface Option {
   id: number;
@@ -47,6 +48,9 @@ const Home = () => {
       <h1>Votações</h1>
       <Link to="/logout"> 
         <button>Sair</button>
+      </Link>
+      <Link to="/create-poll"> 
+        <button>Criar Nova Poll</button> 
       </Link>
       {polls.map(poll => (
         <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
