@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../axios'; 
 import { useNavigate } from 'react-router-dom';
+import "../css/EditPoll.css";
 
 const CreatePoll = () => {
   const [title, setTitle] = useState('');
@@ -23,10 +24,12 @@ const CreatePoll = () => {
     setOptions(newOptions);
   };
 
+  const handleCancel = () => {
+    navigate("/");
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
     const pollData = {
       title,
       description,
@@ -39,11 +42,9 @@ const CreatePoll = () => {
 
     try {
       await axios.post('/api/v1/polls', pollData);
-     
       navigate('/');
     } catch (error) {
       console.error('Erro ao criar a enquete:', error);
-     
     }
   };
 
@@ -70,18 +71,37 @@ const CreatePoll = () => {
         </div>
         <h2>Opções:</h2>
         {options.map((option, index) => (
-          <div key={index}>
+          <div key={index} className="option-container">
             <input
               type="text"
               value={option.text}
               onChange={(e) => handleOptionChange(index, e.target.value)}
               required
             />
-            <button type="button" onClick={() => handleRemoveOption(index)}>Remover</button>
+            <button 
+              type="button" 
+              className="remove-button" 
+              onClick={() => handleRemoveOption(index)}
+            >
+              Remover
+            </button>
           </div>
         ))}
-        <button type="button" onClick={handleAddOption}>Adicionar Opção</button>
-        <button type="submit">Criar Poll</button>
+        <div className="button-container">
+          <button 
+            type="button" 
+            className="add-button" 
+            onClick={handleAddOption}
+          >
+            Adicionar Opção
+          </button>
+          <button type="submit" className="save-button">
+            Criar Poll
+          </button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   );
