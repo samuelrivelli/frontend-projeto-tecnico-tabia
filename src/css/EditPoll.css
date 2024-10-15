@@ -1,0 +1,91 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    flex-grow: 1; 
+    margin: 0 5px; 
+  }
+  
+  .save-button {
+    background-color: #28a745; 
+  }
+  
+  .save-button:hover {
+    background-color: #218838;
+  }
+  
+  .add-button {
+    background-color: #007bff; 
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .remove-button {
+    background-color: #dc3545; 
+  }
+  
+  .remove-button:hover {
+    background-color: #c82333;
+  }
+  
+  .option-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .remove-option {
+    margin-left: 10px;
+  }
+
+  .cancel-button {
+    background-color: #ffc107; 
+    color: white;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0a800;
+  }
+  
+  

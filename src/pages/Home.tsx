@@ -3,7 +3,7 @@ import axios from '../axios';
 import Poll from '../components/Poll.tsx'; 
 import { Link, useNavigate } from "react-router-dom"; 
 import "../css/Home.css";
-import UserPolls from '../components/UserPolls.tsx';
+
 
 interface Option {
   id: number;
@@ -63,7 +63,6 @@ const Home = () => {
           <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
         ))}
       </div>
-      <UserPolls /> 
     </div>
   );
 };
