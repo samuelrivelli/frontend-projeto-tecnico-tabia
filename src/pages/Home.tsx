@@ -3,6 +3,7 @@ import axios from '../axios';
 import Poll from '../components/Poll.tsx'; 
 import { Link, useNavigate } from "react-router-dom"; 
 import "../css/Home.css";
+import UserPolls from '../components/UserPolls.tsx';
 
 interface Option {
   id: number;
@@ -51,7 +52,10 @@ const Home = () => {
           <button className="button-logout">Sair</button>
         </Link>
         <Link to="/create-poll">
-          <button className="button-create">Criar Nova Poll</button>
+          <button className="button-create">Criar Enquete</button>
+        </Link>
+        <Link to="/user-polls">
+          <button className="button-create">Minhas Enquetes</button>
         </Link>
       </div>
       <div className="poll-container">
@@ -59,6 +63,7 @@ const Home = () => {
           <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
         ))}
       </div>
+      <UserPolls /> 
     </div>
   );
 };

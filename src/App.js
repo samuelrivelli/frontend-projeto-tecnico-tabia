@@ -5,6 +5,8 @@ import Login from "./components/Login.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
 import Logout from "./components/Logout.tsx";
 import CreatePoll from "./components/CreatePoll.tsx";
+import UserPolls from "./components/UserPolls.tsx";
+import EditPoll from "./components/EditPoll.tsx";
 
 const App = () => {
   return (
@@ -15,7 +17,9 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/create-poll" element={<CreatePoll />} />
-          {/* Adicione outras rotas privadas aqui */}
+          <Route path="/user-polls" element={<UserPolls />} />
+          <Route path="/edit-poll/:id" element={<EditPoll />} />
+          {/* add as rotas privadas */}
         </Route>
       </Routes>
     </Router>
