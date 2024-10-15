@@ -4,7 +4,6 @@ import Poll from '../components/Poll.tsx';
 import { Link, useNavigate } from "react-router-dom"; 
 import "../css/Home.css";
 
-
 interface Option {
   id: number;
   text: string;
@@ -45,7 +44,7 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className="home-container">
       <h1>Votações</h1>
       <div className="button-container">
         <Link to="/logout">

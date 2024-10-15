@@ -1,7 +1,7 @@
-// src/components/UserPolls.js
 import React, { useEffect, useState } from 'react';
 import axios from '../axios'; 
 import { Link } from 'react-router-dom'; 
+import '../css/UserPolls.css'; 
 
 interface Option {
   id: number;
@@ -47,15 +47,16 @@ const UserPolls = () => {
       {polls.length === 0 ? (
         <p>Você não criou nenhuma enquete ainda.</p>
       ) : (
-        <ul>
+        <div className="polls-grid">
           {polls.map((poll) => (
-            <li key={poll.id}>
-              <Link to={`/edit-poll/${poll.id}`}>
-                {poll.title}
+            <div key={poll.id} className="poll-card">
+              <Link to={`/edit-poll/${poll.id}`} className="poll-link">
+                <h3>{poll.title}</h3>
+                <p>{poll.description}</p>
               </Link>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

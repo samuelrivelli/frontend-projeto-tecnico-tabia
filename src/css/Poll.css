@@ -8,11 +8,10 @@
     font-family: Arial, sans-serif; 
     border: 1px solid #ddd; 
     transition: box-shadow 0.3s ease; 
+    border: none;
 }
 
-.poll-container:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-}
+
 
 .poll-container h2 {
     color: #333; 
