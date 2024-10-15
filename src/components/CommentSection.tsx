@@ -5,6 +5,7 @@ interface Comment {
   id: number;
   content: string;
   userId: number; 
+  username: string;  // Novo campo para armazenar o nome de usuário
   pollId: number;
   createdAt: string;
 }
@@ -38,13 +39,14 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
     try {
       const commentData = {
         content,
-        userId: 12, 
+        userId: localStorage.getItem('userId'), 
         pollId,
       };
 
       const response = await axios.post('/api/v1/comments', commentData);
       setComments([...comments, response.data]);
       setSuccess('Comentário enviado com sucesso!');
+      setContent('');  // Limpar o campo de texto após o envio
     } catch (err) {
       console.error('Erro ao enviar comentário:', err);
       setError('Ocorreu um erro ao enviar seu comentário. Tente novamente.');
@@ -68,7 +70,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
       <div>
         {comments.map(comment => (
           <div key={comment.id}>
-            <p><strong>Comentário:</strong> {comment.content}</p>
+            <p><strong>{comment.username}:</strong> {comment.content}</p>  {/* Exibe o username */}
             <p><small>{new Date(comment.createdAt).toLocaleString()}</small></p>
           </div>
         ))}

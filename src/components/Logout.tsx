@@ -7,6 +7,7 @@ const Logout: React.FC = () => {
     React.useEffect(() => {
         const handleLogout = () => {
             localStorage.removeItem('token');
+            localStorage.removeItem('userId');
             navigate('/login');
         };
 

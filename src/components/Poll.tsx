@@ -21,7 +21,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [pollOptions, setPollOptions] = useState<Option[]>(options);
-  const [isExpanded, setIsExpanded] = useState(false); // Controle de expansão
+  const [isExpanded, setIsExpanded] = useState(false); 
 
   const handleVote = async () => {
     if (selectedOptionId === null) {
@@ -31,7 +31,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
 
     try {
       const voteData = {
-        userId: 12,
+        userId: localStorage.getItem("userId"),
         optionId: selectedOptionId,
         pollId: id,
       };
