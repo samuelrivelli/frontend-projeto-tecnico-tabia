@@ -47,14 +47,14 @@ const Home = () => {
     <div >
       <h1>Votações</h1>
       <div >
-        <Link to="/logout">
-          <button >Sair</button>
-        </Link>
         <Link to="/create-poll">
           <button >Criar Enquete</button>
         </Link>
         <Link to="/user-polls">
           <button>Minhas Enquetes</button>
+        </Link>
+        <Link to="/logout">
+          <button >Sair</button>
         </Link>
       </div>
       <div className="polls-container">
