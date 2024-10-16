@@ -1,0 +1,18 @@
+.poll-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 20px;
+  }
+  
+  .poll-content {
+    flex: 1;
+    max-width: 600px; 
+    margin-right: 20px; 
+  }
+  
+  .comment-section {
+    flex: 1; 
+    max-width: 300px;
+  }
+  

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "../axios";
-import CommentSection from "./CommentSection.tsx";
-import "../css/Poll.css";
+import { useNavigate } from "react-router-dom";
+import "../css/Home.css";
 
 interface Option {
   id: number;
   text: string;
-  voteCount: number; 
+  voteCount: number;
 }
 
 interface PollProps {
@@ -21,7 +21,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [pollOptions, setPollOptions] = useState<Option[]>(options);
-  const [isExpanded, setIsExpanded] = useState(false); 
+  const navigate = useNavigate();
 
   const handleVote = async () => {
     if (selectedOptionId === null) {
@@ -52,17 +52,17 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
     }
   };
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+  const navigateToComments = () => {
+    navigate(`/poll/${id}/comments`); // Navega para a nova rota de detalhes
   };
 
   return (
-    <div className="poll-container">
+    <div className="poll-card">
       <h2>{title}</h2>
       <p>{description}</p>
       <div className="poll-options">
         {pollOptions.map((option) => (
-          <div key={option.id} className="poll-option">
+          <div key={option.id}>
             <input
               type="radio"
               id={`option-${option.id}`}
@@ -70,20 +70,19 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
               value={option.id}
               onChange={() => setSelectedOptionId(option.id)}
             />
-            <label htmlFor={`option-${option.id}`}>
-              {option.text}
-            </label>
-            <span className="vote-count">({option.voteCount} votos)</span>
+            <label htmlFor={`option-${option.id}`}>{option.text}</label>
+            <span>({option.voteCount} votos)</span>
           </div>
         ))}
       </div>
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
-      <button onClick={handleVote}>Votar</button>
-      <button className="expand-button" onClick={toggleExpand}>
-        {isExpanded ? "Ocultar comentários" : "Ver comentários"}
+      {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
+      <button className="vote-button" onClick={handleVote}>
+        Votar
       </button>
-      {isExpanded && <CommentSection pollId={id} />}
+      <button onClick={navigateToComments}>
+        Ver comentários
+      </button>
     </div>
   );
 };

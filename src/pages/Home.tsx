@@ -44,20 +44,20 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <div className="home-container">
+    <div >
       <h1>Votações</h1>
-      <div className="button-container">
+      <div >
         <Link to="/logout">
-          <button className="button-logout">Sair</button>
+          <button >Sair</button>
         </Link>
         <Link to="/create-poll">
-          <button className="button-create">Criar Enquete</button>
+          <button >Criar Enquete</button>
         </Link>
         <Link to="/user-polls">
-          <button className="button-create">Minhas Enquetes</button>
+          <button>Minhas Enquetes</button>
         </Link>
       </div>
-      <div className="poll-container">
+      <div className="polls-container">
         {polls.map(poll => (
           <Poll key={poll.id} id={poll.id} title={poll.title} description={poll.description} options={poll.options} />
         ))}

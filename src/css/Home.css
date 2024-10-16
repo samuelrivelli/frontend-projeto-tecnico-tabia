@@ -1,122 +1,71 @@
-/* Estilos globais */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-  }
-  
+.polls-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+  gap: 30px; 
+  padding: 20px;
+}
 
-  div {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+.poll-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 350px; 
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.3s ease; 
+}
 
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
+.poll-card.expanded {
+  min-height: auto; 
+  overflow: visible; 
+}
 
-  .button-container {
-    display: flex;
-    justify-content: space-between; 
-  }
-  
+.poll-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
 
-  button {
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1; 
-    margin: 0 10px;
-  }
- 
-  .button-logout {
-    background-color: #ff4d4d; 
-  }
-  
-  .button-logout:hover {
-    background-color: #ff1a1a;
-  }
-  
-  .button-create {
-    background-color: #4CAF50; 
-  }
-  
-  .button-create:hover {
-    background-color: #45a049;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
+.poll-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
 
-  .poll-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-  }
-  
-  .poll-item h2 {
-    color: #555;
-  }
-  
-  .poll-item p {
-    color: #777;
-  }
-  
-  .poll-item ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .poll-item ul li {
-    margin-bottom: 5px;
-    padding: 8px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-  }
-  
-  .poll-item ul li:hover {
-    background-color: #d3d3d3;
-  }
-  
-  @media (max-width: 600px) {
-    div {
-      padding: 10px;
-    }
-  
-    button {
-      font-size: 14px;
-      padding: 8px 10px;
-      margin: 0 5px;
-    }
-  
-    .poll-item {
-      padding: 10px;
-    }
-  
-   
-    .button-container {
-      flex-direction: column;
-    }
-  
-    .button-container button {
-      margin: 5px 0; 
-    }
-  }
-  
+.poll-card .poll-options {
+  margin-bottom: 20px;
+  flex-grow: 1; 
+}
+
+.poll-card button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px; 
+}
+
+.poll-card button:hover {
+  background-color: #0056b3;
+}
+
+.poll-card .vote-button {
+  margin-bottom: 15px;
+}
+
+.comment-section {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
