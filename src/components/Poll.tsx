@@ -53,35 +53,15 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options }) => {
   };
 
   const navigateToComments = () => {
-    navigate(`/poll/${id}/comments`); // Navega para a nova rota de detalhes
+    navigate(`/poll/${id}/comments`); 
   };
 
   return (
     <div className="poll-card">
       <h2>{title}</h2>
       <p>{description}</p>
-      <div className="poll-options">
-        {pollOptions.map((option) => (
-          <div key={option.id}>
-            <input
-              type="radio"
-              id={`option-${option.id}`}
-              name="pollOption"
-              value={option.id}
-              onChange={() => setSelectedOptionId(option.id)}
-            />
-            <label htmlFor={`option-${option.id}`}>{option.text}</label>
-            <span>({option.voteCount} votos)</span>
-          </div>
-        ))}
-      </div>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
-      <button className="vote-button" onClick={handleVote}>
-        Votar
-      </button>
       <button onClick={navigateToComments}>
-        Ver comentários
+        Ver Enquete
       </button>
     </div>
   );

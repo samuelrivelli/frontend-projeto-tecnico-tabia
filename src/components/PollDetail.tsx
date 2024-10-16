@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import CommentSection from "./CommentSection.tsx";
 import { useParams, useNavigate } from "react-router-dom";
+import "../css/PollDetail.css";
 
 interface Option {
   id: number;
