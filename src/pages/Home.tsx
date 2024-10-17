@@ -44,17 +44,17 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <div >
+    <div>
       <h1>Votações</h1>
-      <div >
+      <div className="home-buttons">
         <Link to="/create-poll">
-          <button >Criar Enquete</button>
+          <button className={`home-button create-poll`}>Criar Enquete</button>
         </Link>
         <Link to="/user-polls">
-          <button>Minhas Enquetes</button>
+          <button className={`home-button my-polls`}>Minhas Enquetes</button>
         </Link>
         <Link to="/logout">
-          <button >Sair</button>
+          <button className={`home-button logout`}>Sair</button>
         </Link>
       </div>
       <div className="polls-container">
@@ -64,6 +64,8 @@ const Home = () => {
       </div>
     </div>
   );
+  
+  
 };
 
 export default Home;
