@@ -49,7 +49,7 @@ const CreatePoll = () => {
   };
 
   return (
-    <div>
+    <div className="container"> {/* Adicione essa linha */}
       <h1>Criar Nova Poll</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -105,6 +105,7 @@ const CreatePoll = () => {
       </form>
     </div>
   );
+  
 };
 
 export default CreatePoll;
