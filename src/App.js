@@ -8,6 +8,7 @@ import CreatePoll from "./components/CreatePoll.tsx";
 import UserPolls from "./components/UserPolls.tsx";
 import EditPoll from "./components/EditPoll.tsx";
 import PollDetail from "./components/PollDetail.tsx";
+import Register from "./components/Register.tsx";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/create-poll" element={<CreatePoll />} />
