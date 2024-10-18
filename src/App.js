@@ -10,6 +10,8 @@ import EditPoll from "./components/EditPoll.tsx";
 import PollDetail from "./components/PollDetail.tsx";
 import Register from "./components/Register.tsx";
 import RegisterAdmin from "./components/RegisterAdmin.tsx";
+import UserManagement from "./components/UserManagement.tsx"; 
+import UpdateUser from "./components/UpdateUser.tsx"; 
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
+        {/* Rotas privadas */}
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/create-poll" element={<CreatePoll />} />
@@ -25,7 +29,8 @@ const App = () => {
           <Route path="/edit-poll/:id" element={<EditPoll />} />
           <Route path="/poll/:id/comments" element={<PollDetail />} />
           <Route path="/register-admin" element={<RegisterAdmin />} />
-          {/* add as rotas privadas */}
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/update-user/:id" element={<UpdateUser />} />
         </Route>
       </Routes>
     </Router>

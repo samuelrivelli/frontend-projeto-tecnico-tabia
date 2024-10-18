@@ -1,7 +1,7 @@
 .home-buttons {
   display: flex; 
   justify-content: center; 
-  gap: 15px; 
+  gap: 15px;
   margin-bottom: 20px; 
 }
 
@@ -17,12 +17,10 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
-
 .home-button:hover {
   background-color: #0056b3; 
   transform: scale(1.05); 
 }
-
 
 .create-poll {
   background-color: #28a745; 
@@ -46,4 +44,19 @@
 
 .logout:hover {
   background-color: #c82333; 
+}
+
+.register-admin {
+  background-color: #17a2b8; 
+}
+
+.register-admin:hover {
+  background-color: #138496;
+}
+.user-management {
+  background-color: #ffc107; 
+}
+
+.user-management:hover {
+  background-color: #e0a800;
 }
