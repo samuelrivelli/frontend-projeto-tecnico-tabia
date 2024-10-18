@@ -19,13 +19,18 @@ interface PollDTO {
 
 const Home = () => {
   const [polls, setPolls] = useState<PollDTO[]>([]);
+  const [role, setRole] = useState<string | null>(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem('role'); 
+
     if (!token) {
       navigate('/login');
     }
+
+    setRole(userRole); 
 
     const fetchPolls = async () => {
       try {
@@ -53,6 +58,11 @@ const Home = () => {
         <Link to="/user-polls">
           <button className={`home-button my-polls`}>Minhas Enquetes</button>
         </Link>
+        {role === 'ADMIN' && (  
+          <Link to="/register-admin">
+            <button className={`home-button register-admin`}>Cadastrar Admin</button>
+          </Link>
+        )}
         <Link to="/logout">
           <button className={`home-button logout`}>Sair</button>
         </Link>
@@ -64,8 +74,6 @@ const Home = () => {
       </div>
     </div>
   );
-  
-  
 };
 
 export default Home;
