@@ -97,7 +97,7 @@ const EditPoll = () => {
   if (!poll) return <p>Carregando...</p>;
 
   return (
-    <div className="container"> {/* Adicionando essa div */}
+    <div className="container"> 
       <h1>Editar Votação</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>

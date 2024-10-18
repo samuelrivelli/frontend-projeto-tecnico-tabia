@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axios'; 
-import { Link } from 'react-router-dom'; 
-import '../css/UserPolls.css'; 
+import {useNavigate } from 'react-router-dom'; 
+import '../css/Home.css'; 
 
 interface Option {
   id: number;
@@ -19,6 +19,12 @@ interface PollDTO {
 
 const UserPolls = () => {
   const [polls, setPolls] = useState<PollDTO[]>([]); 
+
+  const navigate = useNavigate(); 
+
+  const handleButtonClick = (pollId: number) => {
+    navigate(`/edit-poll/${pollId}`); 
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -50,10 +56,9 @@ const UserPolls = () => {
         <div className="polls-grid">
           {polls.map((poll) => (
             <div key={poll.id} className="poll-card">
-              <Link to={`/edit-poll/${poll.id}`} className="poll-link">
-                <h3>{poll.title}</h3>
-                <p>{poll.description}</p>
-              </Link>
+              <h3>{poll.title}</h3>
+              <p>{poll.description}</p>
+              <button onClick={() => handleButtonClick(poll.id)}>Editar Enquete</button> 
             </div>
           ))}
         </div>
