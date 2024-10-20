@@ -48,32 +48,37 @@ const Home = () => {
     fetchPolls();
   }, [navigate]);
 
+  // Função para deletar uma enquete e removê-la da lista local
+  const handleDeletePoll = (pollId: number) => {
+    setPolls((prevPolls) => prevPolls.filter((poll) => poll.id !== pollId));
+  };
+
   return (
     <div>
       <h1>Votações</h1>
       <div className="home-buttons">
         <Link to="/create-poll">
-          <button className={`home-button create-poll`}>Criar Enquete</button>
+          <button className="home-button create-poll">Criar Enquete</button>
         </Link>
         <Link to="/user-polls">
-          <button className={`home-button my-polls`}>Minhas Enquetes</button>
+          <button className="home-button my-polls">Minhas Enquetes</button>
         </Link>
         {role === "ADMIN" && (
           <>
             <Link to="/register-admin">
-              <button className={`home-button register-admin`}>
+              <button className="home-button register-admin">
                 Cadastrar Admin
               </button>
             </Link>
             <Link to="/user-management">
-              <button className={`home-button user-management`}>
+              <button className="home-button user-management">
                 Gerenciar Usuários
               </button>
             </Link>
           </>
         )}
         <Link to="/logout">
-          <button className={`home-button logout`}>Sair</button>
+          <button className="home-button logout">Sair</button>
         </Link>
       </div>
 
@@ -85,6 +90,7 @@ const Home = () => {
             title={poll.title}
             description={poll.description}
             options={poll.options}
+            onDelete={handleDeletePoll} 
           />
         ))}
       </div>

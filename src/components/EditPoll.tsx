@@ -91,7 +91,11 @@ const EditPoll = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/");  const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
+    
+    if (!confirmDelete) {
+      return; 
+    }
   };
 
   if (!poll) return <p>Carregando...</p>;
