@@ -94,7 +94,7 @@ const PollDetail: React.FC = () => {
             </div>
           ))}
         </div>
-        <button onClick={handleVote}>Votar</button>
+        <button onClick={handleVote}>Votar</button> 
       </div>
       <div className="comment-section">
         <CommentSection pollId={poll.id} />

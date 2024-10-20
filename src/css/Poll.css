@@ -28,6 +28,12 @@
   flex-grow: 1; 
 }
 
+.poll-card .button-container {
+  display: flex; 
+  justify-content: flex-start; 
+  margin-top: auto; 
+}
+
 .poll-card button {
   padding: 12px 20px; 
   width: 150px; 
@@ -39,8 +45,7 @@
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.2s ease; 
   font-size: 1rem; 
-  align-self: flex-start;
-  margin-top: auto; 
+  margin-right: 10px;
 }
 
 .poll-card button:hover {
@@ -48,17 +53,16 @@
   transform: scale(1.05); 
 }
 
-.delete-poll-button {
+.poll-card .delete-poll-button {
   background-color: #f44336;
   color: white;
   border: none;
   padding: 8px 16px;
-  margin-top: 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.delete-poll-button:hover {
+.poll-card .delete-poll-button:hover {
   background-color: #d32f2f;
 }

@@ -14,7 +14,7 @@ interface PollProps {
   title: string;
   description: string;
   options: Option[];
-  onDelete: (id: number) => void;
+  onDelete: (pollId: number) => void; // Função para deletar a enquete
 }
 
 const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }) => {
@@ -33,7 +33,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }
         },
       });
       alert("Enquete deletada com sucesso!");
-      onDelete(id);  // Remove a enquete da tela sem precisar recarregar
+      onDelete(id); // Remove a enquete da tela sem precisar recarregar
     } catch (error) {
       console.error("Erro ao deletar a enquete:", error);
       alert("Erro ao deletar a enquete.");
@@ -45,15 +45,17 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }
       <h2>{title}</h2>
       <p>{description}</p>
       
-      <button onClick={navigateToComments}>
-        Ver Enquete
-      </button>
-
-      {userRole === "ADMIN" && (
-        <button onClick={handleDelete} className="delete-poll-button">
-          Deletar Enquete
+      <div className="button-container">
+        <button onClick={navigateToComments}>
+          Ver Enquete
         </button>
-      )}
+
+        {userRole === "ADMIN" && (
+          <button onClick={handleDelete} className="delete-poll-button">
+            Deletar Enquete
+          </button>
+        )}
+      </div>
     </div>
   );
 };
