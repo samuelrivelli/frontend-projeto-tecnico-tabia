@@ -45,6 +45,13 @@ const UserManagement = () => {
 
   const handleDelete = async (userId: number) => {
     const token = localStorage.getItem('token');
+    
+    const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
+    
+    if (!confirmDelete) {
+      return; 
+    }
+    
     try {
       await axios.delete(`/api/v1/users/${userId}`, {
         headers: {
@@ -58,6 +65,7 @@ const UserManagement = () => {
       setError("Erro ao deletar o usuário.");
     }
   };
+  
 
   const handleUpdate = (userId: number) => {
     navigate(`/update-user/${userId}`);

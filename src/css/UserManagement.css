@@ -1,81 +1,87 @@
 .user-management-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  .user-management-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .error-message {
-    color: #ff4d4d;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .success-message {
-    color: #4caf50;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .user-table th, .user-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .user-table th {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .user-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Botões */
-  .update-button, .delete-button {
-    padding: 8px 12px;
-    margin-right: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .update-button {
-    background-color: #2196f3;
-    color: white;
-  }
-  
-  .update-button:hover {
-    background-color: #0b7dda;
-  }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f;
-  }
-  
+.user-management-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: #4caf50;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle; /* Alinhando o conteúdo verticalmente */
+}
+
+.user-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.user-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Botões */
+.update-button, .delete-button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+  height: 40px; /* Mantendo a altura fixa */
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle; /* Centralizando os botões verticalmente */
+}
+
+/* Botão de Atualizar */
+.update-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.update-button:hover {
+  background-color: #0b7dda;
+}
+
+/* Botão de Deletar */
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}

@@ -19,6 +19,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
   const [content, setContent] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const userId = localStorage.getItem('userId');  
+  const userRole = localStorage.getItem('role');  
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -54,6 +56,32 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
     }
   };
 
+  const handleDelete = async (commentId: number) => {
+
+    const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
+    
+    if (!confirmDelete) {
+      return; 
+    }
+
+    try {
+      await axios.delete(`/api/v1/comments/${commentId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, 
+        },
+      });
+      setComments(comments.filter(comment => comment.id !== commentId)); 
+      setSuccess('Comentário apagado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao deletar comentário:', error);
+      setError('Ocorreu um erro ao deletar o comentário.');
+    }
+  };
+
+  const canDeleteComment = (commentUserId: number) => {
+    return userRole === 'ADMIN' || parseInt(userId!) === commentUserId;
+  };
+
   return (
     <div>
       <h3>Comentários</h3>
@@ -73,6 +101,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
           <div key={comment.id}>
             <p><strong>{comment.username}:</strong> {comment.content}</p> 
             <p><small>{new Date(comment.createdAt).toLocaleString()}</small></p>
+            
+            {canDeleteComment(comment.userId) && (
+              <button onClick={() => handleDelete(comment.id)}>Deletar</button>
+            )}
           </div>
         ))}
       </div>
