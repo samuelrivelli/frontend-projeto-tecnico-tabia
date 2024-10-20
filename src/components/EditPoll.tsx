@@ -77,18 +77,6 @@ const EditPoll = () => {
     }
   };
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Tem certeza de que deseja excluir esta votação?");
-    if (confirmDelete) {
-      try {
-        await axios.delete(`/api/v1/polls/${id}`);
-        navigate("/");
-      } catch (error) {
-        console.error("Erro ao excluir a votação:", error);
-        setError("Erro ao excluir a votação. Tente novamente.");
-      }
-    }
-  };
 
   const handleCancel = () => {
     navigate("/");  const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
@@ -154,9 +142,7 @@ const EditPoll = () => {
           <button type="button" className="cancel-button" onClick={handleCancel}>
             Cancelar
           </button>
-          <button type="button" className="delete-button" onClick={handleDelete}>
-            Excluir Votação
-          </button>
+
         </div>
       </form>
     </div>

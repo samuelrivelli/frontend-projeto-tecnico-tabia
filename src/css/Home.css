@@ -1,62 +1,87 @@
 .home-buttons {
-  display: flex; 
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
   gap: 15px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .home-button {
-  padding: 10px 20px; 
-  background-color: #3a424b; 
-  color: white; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease, transform 0.2s ease; 
-  font-size: 1rem; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 10px 20px;
+  background-color: #3a424b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .home-button:hover {
-  background-color: #0056b3; 
-  transform: scale(1.05); 
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .create-poll {
-  background-color: #28a745; 
+  background-color: #28a745;
 }
 
 .create-poll:hover {
-  background-color: #218838; 
+  background-color: #218838;
 }
 
 .my-polls {
-  background-color: #007bff; 
+  background-color: #007bff;
 }
 
 .my-polls:hover {
-  background-color: #0069d9; 
+  background-color: #0069d9;
 }
 
 .logout {
-  background-color: #dc3545; 
+  background-color: #dc3545;
 }
 
 .logout:hover {
-  background-color: #c82333; 
+  background-color: #c82333;
 }
 
 .register-admin {
-  background-color: #17a2b8; 
+  background-color: #17a2b8;
 }
 
 .register-admin:hover {
   background-color: #138496;
 }
 .user-management {
-  background-color: #ffc107; 
+  background-color: #ffc107;
 }
 
 .user-management:hover {
   background-color: #e0a800;
+}
+
+.edit-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
 }

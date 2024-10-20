@@ -48,7 +48,6 @@ const Home = () => {
     fetchPolls();
   }, [navigate]);
 
-  // Função para deletar uma enquete e removê-la da lista local
   const handleDeletePoll = (pollId: number) => {
     setPolls((prevPolls) => prevPolls.filter((poll) => poll.id !== pollId));
   };

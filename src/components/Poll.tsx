@@ -14,7 +14,7 @@ interface PollProps {
   title: string;
   description: string;
   options: Option[];
-  onDelete: (pollId: number) => void; // Função para deletar a enquete
+  onDelete: (pollId: number) => void; 
 }
 
 const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }) => {
@@ -33,7 +33,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }
         },
       });
       alert("Enquete deletada com sucesso!");
-      onDelete(id); // Remove a enquete da tela sem precisar recarregar
+      onDelete(id); 
     } catch (error) {
       console.error("Erro ao deletar a enquete:", error);
       alert("Erro ao deletar a enquete.");
