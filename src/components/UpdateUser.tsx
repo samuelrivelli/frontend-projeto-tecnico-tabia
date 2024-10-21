@@ -5,7 +5,10 @@ import "../css/UpdateUser.css";
 
 const UpdateUser = () => {
   const [username, setUsername] = useState('');
-  const [role, setRole] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [originalUsername, setOriginalUsername] = useState('');
+  const [originalPassword, setOriginalPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
@@ -21,7 +24,9 @@ const UpdateUser = () => {
           },
         });
         setUsername(response.data.username);
-        setRole(response.data.role);
+        setPassword(response.data.password);
+        setOriginalUsername(response.data.username); // Armazena os valores originais
+        setOriginalPassword(response.data.password);
       } catch (error) {
         console.error('Erro ao buscar usuário:', error);
         setError('Erro ao carregar os dados do usuário.');
@@ -32,12 +37,30 @@ const UpdateUser = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (password !== confirmPassword && password) {
+      setError("As senhas não coincidem");
+      return;
+    }
+
     const token = localStorage.getItem('token');
+    
+    const updatedData: { username?: string; password?: string; role?: string } = {};
+
+    if (username !== originalUsername) {
+      updatedData.username = username;
+    }
+    if (password && password !== originalPassword) {
+      updatedData.password = password;
+    }
+
+    if (Object.keys(updatedData).length === 0) {
+      setError('Nenhuma alteração foi feita.');
+      return;
+    }
+
     try {
-      await axios.put(`/auth/update/${id}`, {
-        username,
-        role,
-      }, {
+      await axios.put(`/auth/update/${id}`, updatedData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,10 +97,30 @@ const UpdateUser = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Deixe em branco para não alterar"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirmar Senha</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Deixe em branco para não alterar"
+          />
+        </div>
         <button type="submit" className="update-button">Salvar</button>
         <button type="button" className="cancel-button" onClick={handleCancel}>
-            Cancelar
-          </button>
+          Cancelar
+        </button>
       </form>
     </div>
   );
