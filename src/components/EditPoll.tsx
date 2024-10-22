@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axios"; 
+import axios from "../axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "../css/EditPoll.css";
 
@@ -53,15 +53,15 @@ const EditPoll = () => {
   };
 
   const handleAddOption = async () => {
-    const newOption: Omit<Option, 'id'> = { // Não incluímos o 'id' aqui
+    const newOption: Omit<Option, "id"> = {
       text: "",
       poolId: poll ? poll.id : 0,
-      voteCount: 0 
+      voteCount: 0,
     };
 
     try {
-      const response = await axios.post(`/api/v1/options`, newOption); // Criar a nova opção
-      setOptions([...options, response.data]); // Adiciona a nova opção à lista com o ID gerado
+      const response = await axios.post(`/api/v1/options`, newOption);
+      setOptions([...options, response.data]);
     } catch (error) {
       console.error("Erro ao adicionar nova opção:", error);
       setError("Erro ao adicionar nova opção.");
@@ -131,7 +131,7 @@ const EditPoll = () => {
   if (!poll) return <p>Carregando...</p>;
 
   return (
-    <div className="container"> 
+    <div className="container">
       <h1>Editar Votação</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -181,12 +181,18 @@ const EditPoll = () => {
           <button type="submit" className="save-button">
             Salvar Alterações
           </button>
-          <button type="button" className="cancel-button" onClick={handleCancel}>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={handleCancel}
+          >
             Cancelar
           </button>
           <button
             type="button"
-            className="toggle-button"
+            className={`toggle-button ${
+              poll.isOpen ? "toggle-button-close" : "toggle-button-open"
+            }`}
             onClick={handleTogglePollStatus}
           >
             {poll.isOpen ? "Fechar Enquete" : "Abrir Enquete"}
