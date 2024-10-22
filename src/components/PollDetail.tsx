@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axios";
+import axios from "../axios"; 
 import CommentSection from "./CommentSection.tsx";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/PollDetail.css";
@@ -15,10 +15,11 @@ interface PollDTO {
   title: string;
   description: string;
   options: Option[];
+  isOpen: boolean; 
 }
 
 const PollDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); 
+  const { id } = useParams<{ id: string }>();
   const [poll, setPoll] = useState<PollDTO | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -26,13 +27,12 @@ const PollDetail: React.FC = () => {
   useEffect(() => {
     const fetchPoll = async () => {
       try {
-
         const response = await axios.get(`/api/v1/polls/${id}`);
-
-        setPoll(response.data);
+        console.log("Resposta da API:", response.data); 
+        setPoll({ ...response.data }); 
       } catch (error) {
         console.error("Erro ao buscar votação:", error);
-        navigate('/'); 
+        navigate('/');
       }
     };
 
@@ -40,6 +40,11 @@ const PollDetail: React.FC = () => {
   }, [id, navigate]);
 
   const handleVote = async () => {
+    if (!poll || !poll.isOpen) { 
+      alert("A enquete está fechada. Você não pode votar.");
+      return;
+    }
+
     if (selectedOptionId === null) {
       alert("Por favor, selecione uma opção para votar.");
       return;
@@ -90,16 +95,27 @@ const PollDetail: React.FC = () => {
                 name="pollOption"
                 value={option.id}
                 onChange={() => setSelectedOptionId(option.id)}
+                disabled={!poll.isOpen} 
               />
               <label htmlFor={`option-${option.id}`}>{option.text}</label>
               <span>({option.voteCount} votos)</span>
             </div>
           ))}
         </div>
-        <button onClick={handleVote}>Votar</button> 
+
+        {poll.isOpen ? (
+          <button onClick={handleVote}>Votar</button>
+        ) : (
+          <p>A enquete está fechada. Você não pode votar.</p>
+        )}
       </div>
+      
       <div className="comment-section">
-        <CommentSection pollId={poll.id} />
+        {poll.isOpen ? (
+          <CommentSection pollId={poll.id} />
+        ) : (
+          <p>A enquete está fechada. Você não pode comentar.</p>
+        )}
       </div>
     </div>
   );

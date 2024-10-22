@@ -35,17 +35,17 @@
 }
 
 .poll-card button {
-  padding: 12px 20px; 
-  width: 150px; 
-  height: 40px; 
+  padding: 8px 16px; 
   background-color: #007bff; 
   color: white; 
   border: none; 
-  border-radius: 5px; 
+  border-radius: 4px; 
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.2s ease; 
   font-size: 1rem; 
   margin-right: 10px;
+  max-width: 150px;
+  flex-shrink: 0; 
 }
 
 .poll-card button:hover {
@@ -57,10 +57,12 @@
   background-color: #f44336;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 16px; 
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  max-width: 150px; 
+  flex-shrink: 0; 
 }
 
 .poll-card .delete-poll-button:hover {
