@@ -14,6 +14,8 @@ interface CommentSectionProps {
   pollId: number; 
 }
 
+const token = localStorage.getItem('token');
+
 const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState<string>('');
@@ -25,7 +27,11 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get('/api/v1/comments'); 
+        const response = await axios.get('/api/v1/comments',{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });; 
         const filteredComments = response.data.filter((comment: Comment) => comment.pollId === pollId);
         setComments(filteredComments);
       } catch (error) {
@@ -46,7 +52,12 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
         pollId,
       };
 
-      const response = await axios.post('/api/v1/comments', commentData);
+      const response = await axios.post('/api/v1/comments', commentData, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+
       setComments((prevComments) => [...prevComments, response.data]); 
       setSuccess('Comentário enviado com sucesso!');
       setContent('');  

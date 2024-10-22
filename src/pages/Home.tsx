@@ -34,6 +34,12 @@ const Home = () => {
 
     const fetchPolls = async () => {
       try {
+
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
         const response = await axios.get("/api/v1/polls", {
           headers: {
             Authorization: `Bearer ${token}`,

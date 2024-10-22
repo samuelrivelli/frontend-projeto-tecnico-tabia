@@ -41,7 +41,19 @@ const CreatePoll = () => {
     };
 
     try {
-      await axios.post('/api/v1/polls', pollData);
+
+      const token = localStorage.getItem('token'); 
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+
+      await axios.post('/api/v1/polls', pollData, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+  
       navigate('/');
     } catch (error) {
       console.error('Erro ao criar a enquete:', error);
