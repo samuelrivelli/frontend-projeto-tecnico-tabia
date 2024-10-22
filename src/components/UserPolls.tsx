@@ -26,14 +26,10 @@ const UserPolls = () => {
   };
 
   const handleDeletePoll = async (pollId: number) => {
-    const token = localStorage.getItem("token");
+    
     if (window.confirm("Você tem certeza que deseja deletar esta enquete?")) {
       try {
-        await axios.delete(`/api/v1/polls/${pollId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await axios.delete(`/api/v1/polls/${pollId}`);
 
         setPolls((prevPolls) => prevPolls.filter((poll) => poll.id !== pollId));
         alert("Enquete deletada com sucesso!");
@@ -45,14 +41,9 @@ const UserPolls = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const fetchUserPolls = async () => {
       try {
-        const response = await axios.get("/api/v1/polls", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get("/api/v1/polls");
 
         const userId = localStorage.getItem("userId");
         const userPolls = response.data.filter(

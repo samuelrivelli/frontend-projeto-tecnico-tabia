@@ -46,17 +46,7 @@ const CreatePoll = () => {
 
     try {
 
-      const token = localStorage.getItem('token'); 
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-
-      await axios.post('/api/v1/polls', pollData, {
-        headers: {
-          Authorization: `Bearer ${token}`, 
-        },
-      });
+      await axios.post('/api/v1/polls', pollData);
   
       navigate('/');
     } catch (error) {
@@ -68,7 +58,7 @@ const CreatePoll = () => {
   return (
     <div className="container"> 
       <h1>Criar Nova Poll</h1>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Título:</label>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "../axios"; 
 import "../css/Register.css"; 
-import { useNavigate } from "react-router-dom";
+
 
 const RegisterAdmin = () => {
     const [username, setUsername] = useState('');
@@ -9,7 +9,6 @@ const RegisterAdmin = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const navigate = useNavigate();
   
     const handleSubmit = async (event: React.FormEvent) => {
       event.preventDefault();
@@ -20,19 +19,10 @@ const RegisterAdmin = () => {
       }
       
       try {
-        const token = localStorage.getItem('token'); 
-        if (!token) {
-          navigate('/login');
-          return;
-        }
-  
+        
         await axios.post('/auth/register/admin', {
           username,
           password
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
         });
   
         setSuccess('Administrador cadastrado com sucesso!');

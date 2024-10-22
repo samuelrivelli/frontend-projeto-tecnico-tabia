@@ -16,23 +16,18 @@ const UserManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+   
     const role = localStorage.getItem('role');
     
-    // Se não for admin, redireciona para a página inicial
-    if (!token || role !== "ADMIN") {
+    if (role !== "ADMIN") {
       navigate('/');
       return;
     }
 
-    // Fetch users from the server
+
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/v1/users', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get('/api/v1/users');
         setUsers(response.data);
       } catch (error) {
         console.error("Erro ao buscar usuários:", error);
@@ -44,7 +39,6 @@ const UserManagement = () => {
   }, [navigate]);
 
   const handleDelete = async (userId: number) => {
-    const token = localStorage.getItem('token');
     
     const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
     
@@ -53,11 +47,7 @@ const UserManagement = () => {
     }
     
     try {
-      await axios.delete(`/api/v1/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(`/api/v1/users/${userId}`);
       setSuccess("Usuário deletado com sucesso!");
       setUsers(users.filter((user) => user.id !== userId));
     } catch (error) {

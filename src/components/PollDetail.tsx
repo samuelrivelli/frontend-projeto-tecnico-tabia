@@ -17,9 +17,6 @@ interface PollDTO {
   options: Option[];
 }
 
-const token = localStorage.getItem('token'); 
-
-
 const PollDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); 
   const [poll, setPoll] = useState<PollDTO | null>(null);
@@ -30,16 +27,7 @@ const PollDetail: React.FC = () => {
     const fetchPoll = async () => {
       try {
 
-        if (!token) {
-          navigate('/login');
-          return;
-        }
-  
-        const response = await axios.get(`/api/v1/polls/${id}`,{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(`/api/v1/polls/${id}`);
 
         setPoll(response.data);
       } catch (error) {
@@ -64,11 +52,7 @@ const PollDetail: React.FC = () => {
         pollId: poll?.id,
       };
 
-      await axios.post('/api/v1/votes', voteData, {
-        headers: {
-          Authorization: `Bearer ${token}`, 
-        },
-      });
+      await axios.post('/api/v1/votes', voteData);
       
       setPoll((prevPoll) => {
         if (!prevPoll) return null;

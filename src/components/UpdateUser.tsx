@@ -15,17 +15,12 @@ const UpdateUser = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`/api/v1/users/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(`/api/v1/users/${id}`)
         setUsername(response.data.username);
         setPassword(response.data.password);
-        setOriginalUsername(response.data.username); // Armazena os valores originais
+        setOriginalUsername(response.data.username); 
         setOriginalPassword(response.data.password);
       } catch (error) {
         console.error('Erro ao buscar usuário:', error);
@@ -43,8 +38,7 @@ const UpdateUser = () => {
       return;
     }
 
-    const token = localStorage.getItem('token');
-    
+  
     const updatedData: { username?: string; password?: string; role?: string } = {};
 
     if (username !== originalUsername) {
@@ -60,11 +54,7 @@ const UpdateUser = () => {
     }
 
     try {
-      await axios.put(`/auth/update/${id}`, updatedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.put(`/auth/update/${id}`, updatedData);
       setSuccess('Usuário atualizado com sucesso!');
       window.alert('Usuário atualizado com sucesso!');
       setError('');

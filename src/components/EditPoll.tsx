@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axios";
+import axios from "../axios"; 
 import { useNavigate, useParams } from "react-router-dom";
 import "../css/EditPoll.css";
 
 interface Option {
   id: number;
   text: string;
+  poolId: number;
   voteCount: number;
 }
 
@@ -13,7 +14,10 @@ interface PollDTO {
   id: number;
   title: string;
   description: string;
+  userId: number;
   options: Option[];
+  createdAt: string;
+  isOpen: boolean;
 }
 
 const EditPoll = () => {
@@ -48,9 +52,20 @@ const EditPoll = () => {
     setOptions(newOptions);
   };
 
-  const handleAddOption = () => {
-    const newOption: Option = { id: Date.now(), text: "", voteCount: 0 };
-    setOptions([...options, newOption]);
+  const handleAddOption = async () => {
+    const newOption: Omit<Option, 'id'> = { // Não incluímos o 'id' aqui
+      text: "",
+      poolId: poll ? poll.id : 0,
+      voteCount: 0 
+    };
+
+    try {
+      const response = await axios.post(`/api/v1/options`, newOption); // Criar a nova opção
+      setOptions([...options, response.data]); // Adiciona a nova opção à lista com o ID gerado
+    } catch (error) {
+      console.error("Erro ao adicionar nova opção:", error);
+      setError("Erro ao adicionar nova opção.");
+    }
   };
 
   const handleRemoveOption = (index: number) => {
@@ -66,10 +81,23 @@ const EditPoll = () => {
         ...poll,
         title,
         description,
-        options,
       };
 
+      console.log("JSON sendo enviado:", updatedPoll);
+
       await axios.put(`/api/v1/polls/${id}`, updatedPoll);
+
+      await Promise.all(
+        options.map((option) =>
+          axios.put(`/api/v1/options/${option.id}`, {
+            text: option.text,
+            poolId: option.poolId,
+            voteCount: option.voteCount,
+          })
+        )
+      );
+
+      console.log("Poll atualizados com sucesso!");
       navigate("/");
     } catch (error) {
       console.error("Erro ao atualizar a votação:", error);
@@ -77,13 +105,27 @@ const EditPoll = () => {
     }
   };
 
+  const handleTogglePollStatus = async () => {
+    if (!poll) return;
+
+    const updatedPoll = {
+      ...poll,
+      isOpen: !poll.isOpen,
+    };
+
+    console.log("JSON para atualizar o status:", updatedPoll);
+
+    try {
+      await axios.put(`/api/v1/polls/${id}`, updatedPoll);
+      setPoll(updatedPoll);
+    } catch (error) {
+      console.error("Erro ao atualizar o status da votação:", error);
+      setError("Erro ao atualizar o status da votação. Tente novamente.");
+    }
+  };
 
   const handleCancel = () => {
-    navigate("/");  const confirmDelete = window.confirm("Você tem certeza que deseja deletar este usuário?");
-    
-    if (!confirmDelete) {
-      return; 
-    }
+    navigate("/");
   };
 
   if (!poll) return <p>Carregando...</p>;
@@ -142,12 +184,17 @@ const EditPoll = () => {
           <button type="button" className="cancel-button" onClick={handleCancel}>
             Cancelar
           </button>
-
+          <button
+            type="button"
+            className="toggle-button"
+            onClick={handleTogglePollStatus}
+          >
+            {poll.isOpen ? "Fechar Enquete" : "Abrir Enquete"}
+          </button>
         </div>
       </form>
     </div>
   );
-  
 };
 
 export default EditPoll;

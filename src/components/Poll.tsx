@@ -27,11 +27,7 @@ const Poll: React.FC<PollProps> = ({ id, title, description, options, onDelete }
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/v1/polls/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      await axios.delete(`/api/v1/polls/${id}`);
       alert("Enquete deletada com sucesso!");
       onDelete(id); 
     } catch (error) {
