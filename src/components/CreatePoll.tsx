@@ -7,6 +7,7 @@ const CreatePoll = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [options, setOptions] = useState([{ text: '', voteCount: 0 }]); 
+  const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate();
 
   const handleAddOption = () => {
@@ -27,8 +28,11 @@ const CreatePoll = () => {
   const handleCancel = () => {
     navigate("/");
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    setErrorMessage('');
 
     const pollData = {
       title,
@@ -57,12 +61,14 @@ const CreatePoll = () => {
       navigate('/');
     } catch (error) {
       console.error('Erro ao criar a enquete:', error);
+      setErrorMessage('Erro ao criar a enquete. Tente novamente.')
     }
   };
 
   return (
     <div className="container"> 
       <h1>Criar Nova Poll</h1>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Título:</label>

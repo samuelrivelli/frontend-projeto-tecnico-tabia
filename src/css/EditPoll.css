@@ -103,6 +103,12 @@ button {
   background-color: #e0a800;
 }
 
+.error-message {
+  color: red; 
+  margin-bottom: 20px; 
+}
+
+
 @media (max-width: 600px) {
   .container {
     padding: 10px;
