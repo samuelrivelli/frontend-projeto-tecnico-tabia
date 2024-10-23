@@ -57,7 +57,7 @@ const CreatePoll = () => {
 
   return (
     <div className="container"> 
-      <h1>Criar Nova Poll</h1>
+      <h1>Criar Nova Enquete</h1>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div>
@@ -104,7 +104,7 @@ const CreatePoll = () => {
             Adicionar Opção
           </button>
           <button type="submit" className="save-button">
-            Criar Poll
+            Criar Enquete
           </button>
           <button type="button" className="cancel-button" onClick={handleCancel}>
             Cancelar

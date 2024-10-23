@@ -106,7 +106,7 @@ const PollDetail: React.FC = () => {
         {poll.isOpen ? (
           <button onClick={handleVote}>Votar</button>
         ) : (
-          <p>A enquete está fechada. Você não pode votar.</p>
+          <p>A enquete está fechada. Você não pode mais votar.</p>
         )}
       </div>
       
@@ -114,7 +114,7 @@ const PollDetail: React.FC = () => {
         {poll.isOpen ? (
           <CommentSection pollId={poll.id} />
         ) : (
-          <p>A enquete está fechada. Você não pode comentar.</p>
+          <p>A enquete está fechada. Você não pode mais comentar.</p>
         )}
       </div>
     </div>
