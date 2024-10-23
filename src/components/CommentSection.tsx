@@ -143,19 +143,31 @@ const CommentSection: React.FC<CommentSectionProps> = ({ pollId }) => {
                       required
                     />
                     <button type="submit">Salvar</button>
-                    <button type="button" onClick={() => setEditingCommentId(null)}>
+                    <button
+                      type="button"
+                      onClick={() => setEditingCommentId(null)}
+                      style={{ marginLeft: '10px', backgroundColor: 'gray', color: 'white' }}
+                    >
                       Cancelar
                     </button>
                   </form>
                 ) : (
                   <>
-                    <button onClick={() => {
-                      setEditingCommentId(comment.id);
-                      setEditContent(comment.content);
-                    }}>
+                    <button
+                      onClick={() => {
+                        setEditingCommentId(comment.id);
+                        setEditContent(comment.content);
+                      }}
+                      style={{ marginRight: '10px', backgroundColor: 'blue', color: 'white' }}
+                    >
                       Editar
                     </button>
-                    <button onClick={() => handleDelete(comment.id)}>Deletar</button>
+                    <button
+                      onClick={() => handleDelete(comment.id)}
+                      style={{ backgroundColor: 'red', color: 'white' }}
+                    >
+                      Deletar
+                    </button>
                   </>
                 )}
               </>
