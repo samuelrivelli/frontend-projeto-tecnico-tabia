@@ -70,9 +70,10 @@ const PollDetail: React.FC = () => {
           ),
         };
       });
-      
-      alert("Voto enviado com sucesso!");
+
+      // Limpar a seleção após votar
       setSelectedOptionId(null);
+      alert("Voto enviado com sucesso!");
     } catch (error) {
       console.error("Erro ao enviar voto:", error);
       alert("Ocorreu um erro ao enviar seu voto. Tente novamente.");
@@ -94,6 +95,7 @@ const PollDetail: React.FC = () => {
                 id={`option-${option.id}`}
                 name="pollOption"
                 value={option.id}
+                checked={selectedOptionId === option.id} // Ligado ao estado selectedOptionId
                 onChange={() => setSelectedOptionId(option.id)}
                 disabled={!poll.isOpen} 
               />
